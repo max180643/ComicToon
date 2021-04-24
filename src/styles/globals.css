@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap');
+
+html,
+body {
+  font-family: 'Mitr', sans-serif;
+}
+
+.text-yellow {
+  color: #fbbf24 !important;
+}
+
+.border-yellow {
+  border-color: #fbbf24 !important;
+}
