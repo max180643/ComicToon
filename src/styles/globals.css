@@ -12,3 +12,12 @@ body {
 .border-yellow {
   border-color: #fbbf24 !important;
 }
+
+.btn-yellow {
+  background-color: #fbbf24 !important;
+  border-color: #fbbf24 !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
