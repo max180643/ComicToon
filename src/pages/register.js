@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import UserPool from './components/modules/UserPool'
+import UserPool from '../components/modules/UserPool'
 
 const register = () => {
   const [email, setEmail] = useState('')

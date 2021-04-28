@@ -1,11 +1,19 @@
 import { useState } from 'react'
 import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js'
-import UserPool from './components/modules/UserPool'
+import UserPool from '../components/modules/UserPool'
+import { useRecoilState } from 'recoil'
+import { loginState, emailState } from '../states/atom'
+import { useRouter } from 'next/router'
 
 const login = () => {
+  const router = useRouter()
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [alertMSG, setAlertMSG] = useState('')
+
+  const [login, setLogin] = useRecoilState(loginState)
+  const [emailGlobal, setEmailGlobal] = useRecoilState(emailState)
 
   const clearStatePassword = () => {
     setPassword('')
@@ -33,8 +41,11 @@ const login = () => {
 
       user.authenticateUser(authDetails, {
         onSuccess: (res) => {
-          console.log('onSuccess:', res)
+          // console.log('onSuccess:', res)
           clearStateLogin()
+          setLogin(true)
+          setEmailGlobal(res.idToken.payload.email)
+          router.push('/')
         },
 
         onFailure: (err) => {
