@@ -4,6 +4,7 @@ import { useRecoilState } from 'recoil'
 import { loginState, emailState } from '../../states/atom'
 import Logout from '../modules/Logout'
 import UserPool from '../modules/UserPool'
+import Cookies from 'js-cookie'
 
 const Navbar = () => {
   const router = useRouter()
@@ -19,6 +20,7 @@ const Navbar = () => {
           // console.log(err)
         } else {
           // console.log(session)
+          Cookies.set('cognito', session.accessToken.jwtToken, { secure: true })
           setLogin(true)
           setEmail(session.idToken.payload.email)
         }

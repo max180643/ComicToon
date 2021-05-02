@@ -4,6 +4,7 @@ import UserPool from '../components/modules/UserPool'
 import { useRecoilState } from 'recoil'
 import { loginState, emailState } from '../states/atom'
 import { useRouter } from 'next/router'
+import Cookies from 'js-cookie'
 
 const login = () => {
   const router = useRouter()
@@ -42,6 +43,7 @@ const login = () => {
       user.authenticateUser(authDetails, {
         onSuccess: (res) => {
           // console.log('onSuccess:', res)
+          Cookies.set('cognito', res.accessToken.jwtToken, { secure: true })
           clearStateLogin()
           setLogin(true)
           setEmailGlobal(res.idToken.payload.email)
