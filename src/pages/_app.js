@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { RecoilRoot } from 'recoil'
 import 'bootstrap/dist/css/bootstrap.css'
 import '../styles/globals.css'
+import '@fortawesome/fontawesome-svg-core/styles.css'
 
 import Navbar from '../components/elements/Navbar'
 
