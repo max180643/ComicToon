@@ -1,8 +1,11 @@
+import ContentWithSidebarLayout from '../components/layout/ContentWithSidebarLayout'
+import AllBook from '../components/layout/AllBook'
+
 const home = () => {
   return (
-    <div>
-      <h2 className="mb-3">หน้าแรก</h2>
-    </div>
+    <ContentWithSidebarLayout title="การ์ตูนมาใหม่">
+      <AllBook />
+    </ContentWithSidebarLayout>
   )
 }
 

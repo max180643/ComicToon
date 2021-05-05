@@ -45,9 +45,9 @@ const register = () => {
   const router = useRouter()
 
   return (
-    <div>
+    <div className="d-flex flex-column justify-content-center align-items-center w-100 mt-4">
       <h2 className="mb-3">สมัครมาชิก</h2>
-      <form onSubmit={RegisterSubmit}>
+      <form onSubmit={RegisterSubmit} className="w-50">
         <div className="mb-3">
           <label htmlFor="InputEmail" className="form-label">
             อีเมล
@@ -112,6 +112,13 @@ const register = () => {
         <button type="submit" className="btn btn-yellow">
           สมัครมาชิก
         </button>
+        <div
+          role="button"
+          onClick={() => router.push('/login')}
+          className="mx-3 d-inline-flex text-dark"
+        >
+          เข้าสู่ระบบ
+        </div>
       </form>
     </div>
   )

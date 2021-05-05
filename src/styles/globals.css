@@ -3,6 +3,24 @@
 html,
 body {
   font-family: 'Mitr', sans-serif;
+  overflow: hidden;
+}
+
+#scroll_dark::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: #f5f5f5;
+}
+
+#scroll_dark::-webkit-scrollbar {
+  width: 12px;
+  background-color: #f5f5f5;
+}
+
+#scroll_dark::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #fbbf24;
 }
 
 .text-yellow {
@@ -20,4 +38,28 @@ body {
 
 .pointer {
   cursor: pointer;
+}
+
+.sideBar {
+  height: 70vh;
+  background: #eeeeee;
+  border-radius: 25px;
+}
+.contentBar {
+  overflow: auto;
+  height: 80vh;
+}
+
+.bookCard {
+  border-width: 0px;
+}
+.bookCard:hover {
+  background: #eeeeee;
+}
+.bookImageCard {
+  height: 225px;
+  object-fit: 'cover';
+  background-repeat: none;
+  background-position: center;
+  width: 100%;
 }

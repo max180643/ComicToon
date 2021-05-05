@@ -60,9 +60,9 @@ const login = () => {
   }
 
   return (
-    <div>
+    <div className="d-flex flex-column justify-content-center align-items-center w-100 mt-4">
       <h2 className="mb-3">เข้าสู่ระบบ</h2>
-      <form onSubmit={LoginSubmit}>
+      <form onSubmit={LoginSubmit} className="w-50">
         <div className="mb-3">
           <label htmlFor="InputEmail" className="form-label">
             อีเมล
@@ -99,6 +99,13 @@ const login = () => {
         <button type="submit" className="btn btn-yellow">
           เข้าสู่ระบบ
         </button>
+        <div
+          role="button"
+          onClick={() => router.push('/register')}
+          className="mx-3 d-inline-flex text-dark"
+        >
+          สมัครสมาชิก
+        </div>
       </form>
     </div>
   )
