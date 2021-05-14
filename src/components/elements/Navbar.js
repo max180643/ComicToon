@@ -102,7 +102,7 @@ const Navbar = () => {
                       </div>
                     </Dropdown.Header>
                     <Dropdown.Divider />
-                    <Dropdown.Item href="#">
+                    <Dropdown.Item onClick={() => router.push('/topup')}>
                       <img
                         src="/coin.png"
                         alt="Coin"
@@ -113,7 +113,6 @@ const Navbar = () => {
                       <button
                         type="button"
                         className="btn btn-yellow btn-sm ms-5"
-                        onClick={() => {}}
                       >
                         เติมเหรียญ
                       </button>

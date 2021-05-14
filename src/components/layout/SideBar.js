@@ -5,11 +5,7 @@ const SideBar = () => {
   return (
     <div className="sideBar p-4">
       <p className="fs-4">
-        <FontAwesomeIcon
-          icon={faHome}
-          className="me-2 align-middle"
-          size="md"
-        />
+        <FontAwesomeIcon icon={faHome} className="me-2 align-middle" />
         หน้าหลัก
       </p>
       <p className="ms-4">

@@ -55,6 +55,7 @@ body {
 }
 .bookCard:hover {
   background: #eeeeee;
+  cursor: pointer;
 }
 .bookImageCard {
   height: 225px;
