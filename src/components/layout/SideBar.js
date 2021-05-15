@@ -10,7 +10,7 @@ const SideBar = () => {
         <FontAwesomeIcon icon={faHome} className="me-2 align-middle" />
         หน้าหลัก
       </p>
-      <p className="ms-4">
+      <p className="ms-4 pointer" onClick={() => router.push('/')}>
         <FontAwesomeIcon
           icon={faDotCircle}
           className="me-2 align-middle"

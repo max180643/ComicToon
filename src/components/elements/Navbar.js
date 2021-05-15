@@ -1,7 +1,12 @@
 import { useEffect, Fragment, forwardRef } from 'react'
 import { useRouter } from 'next/router'
 import { useRecoilState } from 'recoil'
-import { loginState, emailState, nameState } from '../../states/atom'
+import {
+  loginState,
+  emailState,
+  nameState,
+  userIdState
+} from '../../states/atom'
 import Logout from '../modules/Logout'
 import UserPool from '../modules/UserPool'
 import Cookies from 'js-cookie'
@@ -26,6 +31,7 @@ const Navbar = () => {
   const [login, setLogin] = useRecoilState(loginState)
   const [email, setEmail] = useRecoilState(emailState)
   const [name, setName] = useRecoilState(nameState)
+  const [userId, setUserId] = useRecoilState(userIdState)
 
   useEffect(() => {
     const user = UserPool.getCurrentUser()
@@ -58,6 +64,7 @@ const Navbar = () => {
           })
 
           // set state
+          setUserId(username)
           setEmail(email)
           setLogin(true)
         }

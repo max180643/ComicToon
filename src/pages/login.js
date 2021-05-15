@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js'
 import UserPool from '../components/modules/UserPool'
 import { useRecoilState } from 'recoil'
-import { loginState, emailState, nameState } from '../states/atom'
+import { loginState, emailState, nameState, userIdState } from '../states/atom'
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
 
@@ -22,6 +22,7 @@ const login = () => {
   const [login, setLogin] = useRecoilState(loginState)
   const [emailGlobal, setEmailGlobal] = useRecoilState(emailState)
   const [name, setName] = useRecoilState(nameState)
+  const [userId, setUserId] = useRecoilState(userIdState)
 
   const clearStatePassword = () => {
     setPassword('')
@@ -90,6 +91,7 @@ const login = () => {
           Cookies.set('cognito', res.accessToken.jwtToken, { secure: true })
           clearStateLogin()
           setLogin(true)
+          setUserId(res.accessToken.payload.username)
           setEmailGlobal(res.idToken.payload.email)
           router.push('/')
         },

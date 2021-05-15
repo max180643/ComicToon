@@ -1,3 +1,5 @@
+import ContentWithSidebarLayout from '../components/layout/ContentWithSidebarLayout'
+
 const topup = () => {
   const price_data = [
     { coin: 100, price: 29 },
@@ -8,8 +10,7 @@ const topup = () => {
   ]
 
   return (
-    <div>
-      <h2 className="m-2">เติมเหรียญ</h2>
+    <ContentWithSidebarLayout title="เติมเหรียญ">
       <div className="px-2">
         <h5>เหรียญของฉัน: 0 เหรียญ</h5>
         {price_data.map((data) => {
@@ -30,35 +31,8 @@ const topup = () => {
             </div>
           )
         })}
-
-        {/* <table class="table">
-          <tbody>
-            {price_data.map((data) => {
-              return (
-                <tr>
-                  <td>
-                    <h5>
-                      <img
-                        src="/coin.png"
-                        alt="Coin"
-                        width="16"
-                        className="me-2 align-middle"
-                      />
-                      {data.coin} เหรียญ
-                    </h5>
-                  </td>
-                  <td>
-                    <button type="button" className="btn btn-yellow ms-auto">
-                      {data.price} บาท
-                    </button>
-                  </td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table> */}
       </div>
-    </div>
+    </ContentWithSidebarLayout>
   )
 }
 
