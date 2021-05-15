@@ -9,3 +9,8 @@ export const emailState = atom({
   key: 'emailState',
   default: null
 })
+
+export const nameState = atom({
+  key: 'nameState',
+  default: []
+})

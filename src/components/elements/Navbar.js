@@ -1,7 +1,7 @@
 import { useEffect, Fragment, forwardRef } from 'react'
 import { useRouter } from 'next/router'
 import { useRecoilState } from 'recoil'
-import { loginState, emailState } from '../../states/atom'
+import { loginState, emailState, nameState } from '../../states/atom'
 import Logout from '../modules/Logout'
 import UserPool from '../modules/UserPool'
 import Cookies from 'js-cookie'
@@ -14,23 +14,52 @@ import {
   faCaretDown
 } from '@fortawesome/free-solid-svg-icons'
 
+const axios = require('axios')
+
+const apiData = {
+  apiPath: process.env.NEXT_PUBLIC_API_PATH
+}
+
 const Navbar = () => {
   const router = useRouter()
 
   const [login, setLogin] = useRecoilState(loginState)
   const [email, setEmail] = useRecoilState(emailState)
+  const [name, setName] = useRecoilState(nameState)
 
   useEffect(() => {
     const user = UserPool.getCurrentUser()
     if (user) {
-      user.getSession((err, session) => {
+      user.getSession(async (err, session) => {
         if (err) {
           // console.log(err)
         } else {
           // console.log(session)
-          Cookies.set('cognito', session.accessToken.jwtToken, { secure: true })
+          const { username } = session.accessToken.payload
+          const { email } = session.idToken.payload
+
+          // get user data
+          await axios
+            .get(apiData.apiPath + '/api/user/get/' + username)
+            .then((res) => {
+              const { status, response } = res.data
+              if (status === 'success' && response !== 'user not found.') {
+                const { frist_name, last_name } = response
+                setName([frist_name, last_name])
+              }
+            })
+            .catch((error) => {
+              console.log(error)
+            })
+
+          // set cookie
+          Cookies.set('cognito', session.accessToken.jwtToken, {
+            secure: true
+          })
+
+          // set state
+          setEmail(email)
           setLogin(true)
-          setEmail(session.idToken.payload.email)
         }
       })
     } else {
@@ -49,11 +78,7 @@ const Navbar = () => {
       className="text-black-50"
     >
       {children}
-      <FontAwesomeIcon
-        icon={faCaretDown}
-        className="d-inline-block ms-1"
-        size="md"
-      />
+      <FontAwesomeIcon icon={faCaretDown} className="d-inline-block ms-1" />
     </a>
   ))
 
@@ -97,7 +122,9 @@ const Navbar = () => {
                       />
 
                       <div className="d-inline-block">
-                        <h6 className="my-0 text-dark">FristName LastName</h6>
+                        <h6 className="my-0 text-dark">
+                          {name[0]} {name[1]}
+                        </h6>
                         <span>{email}</span>
                       </div>
                     </Dropdown.Header>
@@ -122,7 +149,6 @@ const Navbar = () => {
                       <FontAwesomeIcon
                         icon={faHistory}
                         className="me-2 align-middle"
-                        size="md"
                       />
                       ประวัติการใช้งาน
                     </Dropdown.Item>
@@ -130,7 +156,6 @@ const Navbar = () => {
                       <FontAwesomeIcon
                         icon={faCog}
                         className="me-2 align-middle"
-                        size="md"
                       />
                       ตั้งค่า
                     </Dropdown.Item>
@@ -146,7 +171,6 @@ const Navbar = () => {
                       <FontAwesomeIcon
                         icon={faSignOutAlt}
                         className="me-2 align-middle"
-                        size="md"
                       />
                       ออกจากระบบ
                     </Dropdown.Item>
