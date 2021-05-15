@@ -44,8 +44,8 @@ const Navbar = () => {
             .then((res) => {
               const { status, response } = res.data
               if (status === 'success' && response !== 'user not found.') {
-                const { frist_name, last_name } = response
-                setName([frist_name, last_name])
+                const { first_name, last_name } = response
+                setName([first_name, last_name])
               }
             })
             .catch((error) => {
@@ -152,7 +152,7 @@ const Navbar = () => {
                       />
                       ประวัติการใช้งาน
                     </Dropdown.Item>
-                    <Dropdown.Item href="#">
+                    <Dropdown.Item onClick={() => router.push('/settings')}>
                       <FontAwesomeIcon
                         icon={faCog}
                         className="me-2 align-middle"

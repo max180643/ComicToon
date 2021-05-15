@@ -54,7 +54,7 @@ const login = () => {
           const { username } = res.accessToken.payload
           const { email } = res.idToken.payload
 
-          let fristTime = false
+          let firstTime = false
 
           // get user data
           await axios
@@ -62,18 +62,18 @@ const login = () => {
             .then((res) => {
               const { status, response } = res.data
               if (status === 'success' && response === 'user not found.') {
-                fristTime = true
+                firstTime = true
               } else {
-                const { frist_name, last_name } = response
-                setName([frist_name, last_name])
+                const { first_name, last_name } = response
+                setName([first_name, last_name])
               }
             })
             .catch((error) => {
               console.log(error)
             })
 
-          // if frist time create new user
-          if (fristTime) {
+          // if first time create new user
+          if (firstTime) {
             await axios
               .post(apiData.apiPath + '/api/user/create', {
                 id: username,
