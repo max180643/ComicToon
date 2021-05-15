@@ -11,6 +11,7 @@ const comic = () => {
   const router = useRouter()
 
   const [bookData, setBookData] = useState([])
+  const [episodeData, setEpisodeData] = useState([])
   const { DateTime } = require('luxon')
 
   useEffect(() => {
@@ -22,6 +23,20 @@ const comic = () => {
         .then(function (response) {
           const checkStatus = response.data.status
           if (checkStatus === 'success') setBookData(response.data.response)
+          else console.log('Load Data Error')
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+        .then(function () {
+          // always executed
+        })
+      axios
+        .get(apiData.apiPath + '/api/episode/all/' + cid)
+        .then(function (response) {
+          const checkStatus = response.data.status
+          console.log(response.data.response)
+          if (checkStatus === 'success') setEpisodeData(response.data.response)
           else console.log('Load Data Error')
         })
         .catch(function (error) {
@@ -56,22 +71,27 @@ const comic = () => {
           >
             เพิ่มตอน
           </button>
-          <div className="my-4 mx-2 p-1 bg-dark text-light rounded">
-            <p>ตอนที่ 1| ชื่อตอน</p>
-            <div class="d-flex justify-content-end">
-              <button className="btn btn-light rounded-circle mx-2">300</button>
-              <button className="btn btn-light rounded-circle mx-2">
-                อ่าน
-              </button>
+          {episodeData.map((data) => (
+            <div className="my-4 mx-2 p-1 bg-dark text-light rounded">
+              <p>{data.title}</p>
+              <div class="d-flex justify-content-end">
+                <button className="btn btn-light rounded-circle mx-2">
+                  {data.price}
+                </button>
+                <button
+                  onClick={() =>
+                    router.push({
+                      pathname: '/episode/[eid]',
+                      query: { eid: data.id }
+                    })
+                  }
+                  className="btn btn-light rounded-circle mx-2"
+                >
+                  อ่าน
+                </button>
+              </div>
             </div>
-          </div>
-          {/* <div className="my-4 mx-2 p-1 bg-dark text-light rounded">
-            <p>ตอนที่ 2| ชื่อตอน</p>
-            <button className="btn btn-light rounded-circle mx-2">300</button>
-          </div>
-          <div className="my-4 mx-2 p-1 bg-dark text-light rounded">
-            <p>ตอนที่ 3| ชื่อตอน</p>
-          </div> */}
+          ))}
         </Col>
       </Row>
     </ContentWithSidebarLayout>
