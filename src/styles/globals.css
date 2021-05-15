@@ -64,3 +64,10 @@ body {
   background-position: center;
   width: 100%;
 }
+
+.all-page-container {
+  height: 100%;
+  max-height: calc(100vh - 42px);
+  overflow: auto;
+  margin: 0 auto;
+}
