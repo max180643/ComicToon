@@ -52,7 +52,11 @@ const comic = () => {
     <ContentWithSidebarLayout title={bookData.name}>
       <Row className="mt-4">
         <Col className="d-flex justify-content-center">
-          <img src={bookData.cover} alt={bookData.name} className="h-75" />
+          <img
+            src={bookData.cover}
+            alt={bookData.name}
+            className="mh-100 mw-100"
+          />
         </Col>
         <Col>
           <p>{bookData.description}</p>

@@ -38,7 +38,7 @@ const episodeAdd = () => {
     }
   }, [router.isReady])
 
-  const AddComicSubmit = (event) => {
+  const AddEpisodeSubmit = (event) => {
     event.preventDefault()
 
     if (title && price && file) {
@@ -61,7 +61,7 @@ const episodeAdd = () => {
 
   return (
     <ContentWithSidebarLayout title="เพิ่มตอน">
-      <form onSubmit={AddComicSubmit} className="w-75 m-4">
+      <form onSubmit={AddEpisodeSubmit} className="w-75 m-4">
         <div className="mb-3">
           <label htmlFor="InputName" className="form-label">
             ชื่อเรื่อง
@@ -95,7 +95,7 @@ const episodeAdd = () => {
             type="number"
             className="form-control"
             id="InputPrice"
-            placeholder="ชื่อตอน"
+            placeholder="ราคา"
             value={price}
             onChange={(event) => setPrice(event.target.value)}
           />
