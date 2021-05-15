@@ -41,7 +41,7 @@ const episodeAdd = () => {
   const AddEpisodeSubmit = (event) => {
     event.preventDefault()
 
-    if (title && price && file) {
+    if (title && file) {
       var formData = new FormData()
       formData.append('title', title)
       formData.append('price', price)

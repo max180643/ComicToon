@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import ContentWithSidebarLayout from '../../components/layout/ContentWithSidebarLayout'
 import { Row, Col } from 'react-bootstrap'
+const { DateTime } = require('luxon')
 
 const apiData = {
   apiPath: process.env.NEXT_PUBLIC_API_PATH
@@ -12,7 +13,6 @@ const comic = () => {
 
   const [bookData, setBookData] = useState([])
   const [episodeData, setEpisodeData] = useState([])
-  const { DateTime } = require('luxon')
 
   useEffect(() => {
     if (router.isReady) {
@@ -35,7 +35,7 @@ const comic = () => {
         .get(apiData.apiPath + '/api/episode/all/' + cid)
         .then(function (response) {
           const checkStatus = response.data.status
-          console.log(response.data.response)
+          // console.log(response.data.response)
           if (checkStatus === 'success') setEpisodeData(response.data.response)
           else console.log('Load Data Error')
         })
