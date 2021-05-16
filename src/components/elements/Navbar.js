@@ -5,7 +5,8 @@ import {
   loginState,
   emailState,
   nameState,
-  userIdState
+  userIdState,
+  coinState
 } from '../../states/atom'
 import Logout from '../modules/Logout'
 import UserPool from '../modules/UserPool'
@@ -32,6 +33,7 @@ const Navbar = () => {
   const [email, setEmail] = useRecoilState(emailState)
   const [name, setName] = useRecoilState(nameState)
   const [userId, setUserId] = useRecoilState(userIdState)
+  const [coin, setCoin] = useRecoilState(coinState)
 
   useEffect(() => {
     const user = UserPool.getCurrentUser()
@@ -50,8 +52,9 @@ const Navbar = () => {
             .then((res) => {
               const { status, response } = res.data
               if (status === 'success' && response !== 'user not found.') {
-                const { first_name, last_name } = response
+                const { first_name, last_name, coin } = response
                 setName([first_name, last_name])
+                setCoin(coin)
               }
             })
             .catch((error) => {
@@ -143,7 +146,7 @@ const Navbar = () => {
                         width="16"
                         className="me-2 align-middle"
                       />
-                      0 เหรียญ
+                      {coin} เหรียญ
                       <button
                         type="button"
                         className="btn btn-yellow btn-sm ms-5"

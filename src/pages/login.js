@@ -2,7 +2,13 @@ import { useState } from 'react'
 import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js'
 import UserPool from '../components/modules/UserPool'
 import { useRecoilState } from 'recoil'
-import { loginState, emailState, nameState, userIdState } from '../states/atom'
+import {
+  loginState,
+  emailState,
+  nameState,
+  userIdState,
+  coinState
+} from '../states/atom'
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
 
@@ -23,6 +29,7 @@ const login = () => {
   const [emailGlobal, setEmailGlobal] = useRecoilState(emailState)
   const [name, setName] = useRecoilState(nameState)
   const [userId, setUserId] = useRecoilState(userIdState)
+  const [coin, setCoin] = useRecoilState(coinState)
 
   const clearStatePassword = () => {
     setPassword('')
@@ -65,8 +72,9 @@ const login = () => {
               if (status === 'success' && response === 'user not found.') {
                 firstTime = true
               } else {
-                const { first_name, last_name } = response
+                const { first_name, last_name, coin } = response
                 setName([first_name, last_name])
+                setCoin(coin)
               }
             })
             .catch((error) => {
