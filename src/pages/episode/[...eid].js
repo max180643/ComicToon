@@ -41,6 +41,7 @@ const episodeAdd = () => {
 
   return (
     <div className="all-page-container">
+      <h1 className="mx-2 my-4">อ่านการ์ตูน</h1>
       <Document file={episodeData.path} onLoadSuccess={onDocumentLoadSuccess}>
         {Array.from(new Array(numPages), (el, index) => (
           <Page
