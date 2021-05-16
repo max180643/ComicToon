@@ -57,8 +57,6 @@ const login = () => {
 
       user.authenticateUser(authDetails, {
         onSuccess: async (res) => {
-          // console.log('onSuccess:', res)
-
           const { username } = res.accessToken.payload
           const { email } = res.idToken.payload
 
@@ -88,9 +86,7 @@ const login = () => {
                 id: username,
                 email: email
               })
-              .then((res) => {
-                // console.log(res.data)
-              })
+              .then((res) => {})
               .catch((error) => {
                 console.log(error)
               })

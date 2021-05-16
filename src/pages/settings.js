@@ -45,7 +45,6 @@ const settings = () => {
         })
         .then((res) => {
           const { status, response } = res.data
-          console.log(response)
           if (status === 'success') {
             setName([firstName, lastName])
             setSuccessMSG(true)

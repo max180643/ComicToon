@@ -40,9 +40,7 @@ const Navbar = () => {
     if (user) {
       user.getSession(async (err, session) => {
         if (err) {
-          // console.log(err)
         } else {
-          // console.log(session)
           const { username } = session.accessToken.payload
           const { email } = session.idToken.payload
 

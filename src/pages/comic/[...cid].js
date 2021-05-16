@@ -25,7 +25,6 @@ const comic = () => {
         .then(function (response) {
           const checkStatus = response.data.status
           if (checkStatus === 'success') setBookData(response.data.response)
-          else console.log('Load Data Error')
         })
         .catch(function (error) {
           console.log(error)
@@ -37,7 +36,6 @@ const comic = () => {
         .get(apiData.apiPath + '/api/episode/all/' + cid)
         .then(function (response) {
           const checkStatus = response.data.status
-          // console.log(response.data.response)
           if (checkStatus === 'success') {
             const sortedEpisodeData = response.data.response
               .sort(
@@ -45,7 +43,7 @@ const comic = () => {
               )
               .reverse()
             setEpisodeData(sortedEpisodeData)
-          } else console.log('Load Data Error')
+          }
         })
         .catch(function (error) {
           console.log(error)

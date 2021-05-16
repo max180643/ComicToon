@@ -40,7 +40,6 @@ const episodeAdd = () => {
           const checkStatus = response.data.status
           setComicId(cid)
           if (checkStatus === 'success') setBookData(response.data.response)
-          else console.log('Load Data Error')
         })
         .catch(function (error) {
           console.log(error)
@@ -63,8 +62,6 @@ const episodeAdd = () => {
       axios
         .post(apiData.apiPath + '/api/episode/add/', formData)
         .then(function (response) {
-          console.log(response)
-          console.log(comic_id)
           router.push({
             pathname: '/comic/[cid]',
             query: { cid: comic_id }

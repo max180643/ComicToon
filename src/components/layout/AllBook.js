@@ -16,7 +16,6 @@ const allBook = () => {
       .then(function (response) {
         const checkStatus = response.data.status
         if (checkStatus === 'success') setBookData(response.data.response)
-        else console.log('Load Data Error')
       })
       .catch(function (error) {
         console.log(error)

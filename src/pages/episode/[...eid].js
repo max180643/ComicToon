@@ -26,9 +26,7 @@ const episodeAdd = () => {
         .get(apiData.apiPath + '/api/episode/id/' + eid)
         .then(function (response) {
           const checkStatus = response.data.status
-          console.log(response.data.response)
           if (checkStatus === 'success') setEpisodeData(response.data.response)
-          else console.log('Load Data Error')
         })
         .catch(function (error) {
           console.log(error)

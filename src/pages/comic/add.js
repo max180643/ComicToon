@@ -27,7 +27,6 @@ const comicAdd = () => {
       axios
         .post(apiData.apiPath + '/api/comic/add/', formData)
         .then(function (response) {
-          console.log(response)
           router.push('/')
         })
         .catch(function (error) {
