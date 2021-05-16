@@ -25,13 +25,11 @@ const register = () => {
     event.preventDefault()
 
     if (email && password && confirmPassword) {
-      if (password === confirmPassword && password >= 8) {
+      if (password === confirmPassword && password.length >= 8) {
         UserPool.signUp(email, password, [], null, (err, res) => {
           if (err) {
-            // console.error(err)
             setAlertMSG(err.message)
           }
-          // console.log(res)
           clearRegisterState()
           setSuccessMSG(true)
         })
