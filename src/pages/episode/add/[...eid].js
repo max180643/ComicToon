@@ -33,20 +33,21 @@ const episodeAdd = () => {
       const { cid } = router.query
       if (!cid) {
         router.push('/')
+      } else {
+        axios
+          .get(apiData.apiPath + '/api/comic/id/' + cid)
+          .then(function (response) {
+            const checkStatus = response.data.status
+            setComicId(cid)
+            if (checkStatus === 'success') setBookData(response.data.response)
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+          .then(function () {
+            // always executed
+          })
       }
-      axios
-        .get(apiData.apiPath + '/api/comic/id/' + cid)
-        .then(function (response) {
-          const checkStatus = response.data.status
-          setComicId(cid)
-          if (checkStatus === 'success') setBookData(response.data.response)
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
-        .then(function () {
-          // always executed
-        })
     }
   }, [router.isReady])
 

@@ -36,7 +36,7 @@ const comicAdd = () => {
   }
 
   return (
-    <ContentWithSidebarLayout title="เพิ่มตอน">
+    <ContentWithSidebarLayout title="เพิ่มการ์ตูน">
       <Row>
         <Col>
           <form onSubmit={AddComicSubmit} className="w-75 m-4">
@@ -80,7 +80,7 @@ const comicAdd = () => {
             </div>
 
             <button type="submit" className="btn btn-yellow">
-              เพิ่มs
+              เพิ่ม
             </button>
           </form>
         </Col>
