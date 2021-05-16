@@ -47,14 +47,14 @@ body {
 }
 .contentBar {
   overflow: auto;
-  height: 80vh;
+  height: 88vh;
 }
 
 .bookCard {
   border-width: 0px;
 }
 .bookCard:hover {
-  background: #eeeeee;
+  background: #f5f5f5;
   cursor: pointer;
 }
 .bookImageCard {
@@ -70,4 +70,8 @@ body {
   max-height: calc(100vh - 42px);
   overflow: auto;
   margin: 0 auto;
+}
+
+.episodeCard:hover {
+  background: #fff9e9;
 }

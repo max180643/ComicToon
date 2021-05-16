@@ -155,7 +155,7 @@ const Navbar = () => {
                       </button>
                     </Dropdown.Item>
                     <Dropdown.Divider />
-                    <Dropdown.Item href="#">
+                    <Dropdown.Item href="#" disabled>
                       <FontAwesomeIcon
                         icon={faHistory}
                         className="me-2 align-middle"

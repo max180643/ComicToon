@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import ContentWithSidebarLayout from '../../components/layout/ContentWithSidebarLayout'
 import { Row, Col } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 const { DateTime } = require('luxon')
 
 const apiData = {
@@ -36,8 +38,14 @@ const comic = () => {
         .then(function (response) {
           const checkStatus = response.data.status
           // console.log(response.data.response)
-          if (checkStatus === 'success') setEpisodeData(response.data.response)
-          else console.log('Load Data Error')
+          if (checkStatus === 'success') {
+            const sortedEpisodeData = response.data.response
+              .sort(
+                (a, b) => DateTime.fromISO(b.date) - DateTime.fromISO(a.date)
+              )
+              .reverse()
+            setEpisodeData(sortedEpisodeData)
+          } else console.log('Load Data Error')
         })
         .catch(function (error) {
           console.log(error)
@@ -71,28 +79,56 @@ const comic = () => {
                 query: { cid: bookData.id }
               })
             }
-            className="btn btn-dark rounded"
+            className="btn btn-yellow rounded mb-3"
           >
             เพิ่มตอน
           </button>
           {episodeData.map((data) => (
-            <div className="my-4 mx-2 p-1 bg-dark text-light rounded">
-              <p>{data.title}</p>
-              <div class="d-flex justify-content-end">
-                <button className="btn btn-light rounded-circle mx-2">
-                  {data.price}
-                </button>
-                <button
-                  onClick={() =>
-                    router.push({
-                      pathname: '/episode/[eid]',
-                      query: { eid: data.id }
-                    })
-                  }
-                  className="btn btn-light rounded-circle mx-2"
-                >
-                  อ่าน
-                </button>
+            <div
+              className="my-2 mx-2 p-1 border border-yellow rounded pointer shadow-sm episodeCard"
+              key={data.id}
+              onClick={() =>
+                router.push({
+                  pathname: '/episode/[eid]',
+                  query: { eid: data.id }
+                })
+              }
+            >
+              <div className="d-flex justify-content-between">
+                <p className="m-1">{data.title} </p>
+                {data.price > 0 && (
+                  <div className="d-inline mt-1 me-2">
+                    <img
+                      src="/coin.png"
+                      alt="Coin"
+                      width="16"
+                      className="me-2 align-middle"
+                    />
+                    <span>{data.price}</span>
+                  </div>
+                )}
+              </div>
+              <div className="d-flex justify-content-end">
+                <div className="mx-2">
+                  {data.price === 0 && (
+                    <span>
+                      <FontAwesomeIcon
+                        icon={faEye}
+                        className="d-inline-block ms-1"
+                      />
+                      {' อ่าน'}
+                    </span>
+                  )}
+                  {data.price > 0 && (
+                    <span>
+                      <FontAwesomeIcon
+                        icon={faShoppingCart}
+                        className="d-inline-block ms-1"
+                      />
+                      {' ซื้อ'}
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
           ))}
