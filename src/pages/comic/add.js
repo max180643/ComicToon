@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import ContentWithSidebarLayout from '../../components/layout/ContentWithSidebarLayout'
+import { Row, Col } from 'react-bootstrap'
 
 const apiData = {
   apiPath: process.env.NEXT_PUBLIC_API_PATH
@@ -37,50 +38,63 @@ const comicAdd = () => {
 
   return (
     <ContentWithSidebarLayout title="เพิ่มตอน">
-      <form onSubmit={AddComicSubmit} className="w-75 m-4">
-        <div className="mb-3">
-          <label htmlFor="InputName" className="form-label">
-            ชื่อเรื่อง
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="InputName"
-            placeholder="ชื่อเรื่อง"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="InputDescription" className="form-label">
-            คำอธิบาย
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="InputDescription"
-            placeholder="คำอธิบาย"
-            value={description}
-            onChange={(event) => setDescription(event.target.value)}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="InputFile" className="form-label">
-            รูปปก
-          </label>
-          <input
-            type="file"
-            className="form-control"
-            id="InputFile"
-            accept="image/png, image/jpeg"
-            onChange={(event) => setFile(event.target.files[0])}
-          />
-        </div>
+      <Row>
+        <Col>
+          <form onSubmit={AddComicSubmit} className="w-75 m-4">
+            <div className="mb-3">
+              <label htmlFor="InputName" className="form-label">
+                ชื่อเรื่อง
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="InputName"
+                placeholder="ชื่อเรื่อง"
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="InputDescription" className="form-label">
+                คำอธิบาย
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="InputDescription"
+                placeholder="คำอธิบาย"
+                value={description}
+                onChange={(event) => setDescription(event.target.value)}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="InputFile" className="form-label">
+                รูปปก
+              </label>
+              <input
+                type="file"
+                className="form-control"
+                id="InputFile"
+                accept="image/png, image/jpeg"
+                onChange={(event) => setFile(event.target.files[0])}
+              />
+            </div>
 
-        <button type="submit" className="btn btn-yellow">
-          เพิ่ม
-        </button>
-      </form>
+            <button type="submit" className="btn btn-yellow">
+              เพิ่มs
+            </button>
+          </form>
+        </Col>
+        <Col>
+          {file.length !== 0 && (
+            <img
+              src={URL.createObjectURL(file)}
+              alt="preview"
+              className="mw-100 mh-100"
+            />
+          )}
+        </Col>
+      </Row>
     </ContentWithSidebarLayout>
   )
 }
