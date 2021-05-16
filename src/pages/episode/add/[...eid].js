@@ -19,7 +19,7 @@ const episodeAdd = () => {
   const [bookData, setBookData] = useState([])
   const [title, setTitle] = useState('')
   const [price, setPrice] = useState(0)
-  const [file, setFile] = useState([])
+  const [file, setFile] = useState()
   const [numPages, setNumPages] = useState(null)
 
   const onDocumentLoadSuccess = ({ numPages }) => {
@@ -31,6 +31,9 @@ const episodeAdd = () => {
   useEffect(() => {
     if (router.isReady) {
       const { cid } = router.query
+      if (!cid) {
+        router.push('/')
+      }
       axios
         .get(apiData.apiPath + '/api/comic/id/' + cid)
         .then(function (response) {
@@ -61,7 +64,11 @@ const episodeAdd = () => {
         .post(apiData.apiPath + '/api/episode/add/', formData)
         .then(function (response) {
           console.log(response)
-          router.push('/')
+          console.log(comic_id)
+          router.push({
+            pathname: '/comic/[cid]',
+            query: { cid: comic_id }
+          })
         })
         .catch(function (error) {
           console.log(error)
@@ -131,16 +138,18 @@ const episodeAdd = () => {
           </form>
         </Col>
         <Col>
-          <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>
-            {Array.from(new Array(numPages), (el, index) => (
-              <Page
-                key={`page_${index + 1}`}
-                pageNumber={index + 1}
-                renderTextLayer={false}
-                className="d-flex justify-content-center"
-              />
-            ))}
-          </Document>
+          {file && (
+            <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>
+              {Array.from(new Array(numPages), (el, index) => (
+                <Page
+                  key={`page_${index + 1}`}
+                  pageNumber={index + 1}
+                  renderTextLayer={false}
+                  className="d-flex justify-content-center"
+                />
+              ))}
+            </Document>
+          )}
         </Col>
       </Row>
     </ContentWithSidebarLayout>

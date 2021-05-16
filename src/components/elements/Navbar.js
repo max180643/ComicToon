@@ -15,7 +15,7 @@ import { Dropdown } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faSignOutAlt,
-  faHistory,
+  faBookMedical,
   faCog,
   faCaretDown
 } from '@fortawesome/free-solid-svg-icons'
@@ -155,12 +155,12 @@ const Navbar = () => {
                       </button>
                     </Dropdown.Item>
                     <Dropdown.Divider />
-                    <Dropdown.Item href="#" disabled>
+                    <Dropdown.Item onClick={() => router.push('/comic/add')}>
                       <FontAwesomeIcon
-                        icon={faHistory}
+                        icon={faBookMedical}
                         className="me-2 align-middle"
                       />
-                      ประวัติการใช้งาน
+                      เพิ่มการ์ตูน
                     </Dropdown.Item>
                     <Dropdown.Item onClick={() => router.push('/settings')}>
                       <FontAwesomeIcon
